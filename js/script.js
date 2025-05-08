@@ -2,7 +2,7 @@ class BarraNavegacion extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadowL = `
+        this.shadowRoot.innerHTML =        `
             <style>
                 nav {
                     background-color: #333;
@@ -21,5 +21,7 @@ class BarraNavegacion extends HTMLElement {
                 <a href="#contact">Contact</a>
             </nav>
         `;
+        
     }
 }
+customElements.define('barra-navegacion', BarraNavegacion);
