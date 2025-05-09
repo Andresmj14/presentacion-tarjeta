@@ -1,0 +1,9 @@
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+body{
+    background-color: cadetblue;
+    background: linear-gradient(to right, #000012,);
+    color: #ffffff;
+}
+

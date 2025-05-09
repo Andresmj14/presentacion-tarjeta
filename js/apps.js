@@ -1,135 +1,71 @@
 "use strict";
+import { datas} from "../js/datos.js";
+import {filtroBuscadordeHeroes} from "../js/filtrobuscador.js";
+import { elcomponente } from "../js/filtrobuscador.js";
 
-import { HeroesStore } from "../base/datos.js";
-let compn = document.querySelector('ver-heroes');
-console.log(compn)
 
-const buscarheroes = ( texto) => {
-    let lisOop =[];
-    HeroesStore.forEach(personaje => {
-        if (personaje.clave.toLocaleLowerCase().startsWith(texto)){
-            lisOop.push(personaje)
-        }
-
-    });
-    compn = document.querySelector('base-heroes');
-    console.log(lisOop)
-    compn.HeroesStore = lisOop
-
-}
-
-class BarradeBusqueda extends HTMLElement {
-    constructor(){
-        super();
-        this.attachShadow ({mode:'open'});
-        this.shadowRoot.innerHTML =  `
+class NavBar extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow ({mode: 'open'});
+    this.shadowRoot.innerHTML = /* CCS AND HTML */`
         <style>
-        
-        
+
         </style>
-        
-        <div class="barra">
-            <form id="form">
-            <h2 class="texto-buscar>BUSCAR...</h2>
-            <input id="busqueda" type="text">
-            <p><span class="olo"> search</span></p>
-            
-            </form>
-        
-        
-        
-        
-        </div>`
-        ;
+            <div class="navbar">
+                <form action="">
+                    <h1 class="texto-buscar"> MARVEL & DC COMICS  </h1>
+                    <input id="input-buscador" type="text" placeholder="BUSCAR......">
 
-    }
-connectedCallback(){
-        let info = this.shadowRoot.querySelector('#busqueda')
-        info.addEventListener('input', () => {
-            let valor = info.value.toLowerCase()
-            buscarheroes(valor)
+                </form>
+            </div>`;
+  }
+
+    connetedCallback(){
+        let eldato = this.shadowRoot.querySelector('#input-buscador')
+        eldato.addEventListener('input', () => {
+            let valor = eldato.ariaValueMax.toLowerCase()
+            filtroBuscadordeHeroes(valor)
         })
+
+        
     }
+
+
+
+
+
+
 }
-class VerHeroes extends HTMLElement {
-    constructor(){
-        super();
-        this.attachShadow({mode:'open'});
-        this._HeroesStore = []
-        this.styles = document.createElement('style')
-        this.styles.innerHTML = /*ccs*/`
-            .HeroesStore {
-                padding: 20px;
-                margin: 10px;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-            }
-            .titulo-portada {
-                font-size: 1.5em;
-                color: #333;
-             }
-            /* Agrega más estilos aquí */
-             `;
-        
-        
-        
-       
-       
-        
-        this.shadowRoot.appendChild(this.styles)
+class VerlosHeroes extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow ({mode:'open'});
+    this._datas = []
+    this.estilos = document.createElement('style')
+    this.estilos.innerHTML = /*apartado para el css*/`
 
+    
+    
+    
+    `
 
-
-
+    
+        this.shadowRoot.append(this.estilos)
     }
-    set HeroesStore(value){
-        this._HeroesStore = value ;
+
+    
+    set datas(value){
+        this_datas = value;
         this.render();
-
-
-
     }
-    render(){
-        this.shadowRoot.innerHTML = '';
-        this.shadowRoot.appendChild(this.styles.cloneNode(true));
-        this._HeroesStore.forEach(HeroesStore=>{
-            const cadena = document.createElement('div');
-                cadena.classList.add('HeroesStore')
-                cadena.innerHTML = /*html*/
-                    `
-                    <h1 class="titulo-portada">${HeroesStore.nombre_heroes}</h1>
-                    <img src=${HeroesStore.imagen} alt="">
-                    <p>${HeroesStore.nombre_real}</p>
-                    <p>${HeroesStore.proveniente_de}</p>
-                    <p>${HeroesStore.poderes}</p>
-                    <p>${HeroesStore.descripcion_del_personaje}</p>
-                    <button id="view${HeroesStore.nombre_real}">Ver mas</button>
-                `;
-           
-                this.shadowRoot.appendChild(cadena);
-                //*cadena.querySelector('view${HeroesStore.nombre_real}').addEventListener('click'  {
-                     Swal.fire({
-                        title: "Sweet!",
-                        text: "Modal with a custom image.",
-                        imageUrl: "https://unsplash.it/400/200",
-                        imageWidth: 400,
-                        imageHeight: 200,
-                        imageAlt: "Custom image"
-                    })
-                
-
-
-
-                
-
-
-
-
-
-        });
-    }
+     render() {
+        this.shadowRoot.innerHTML = ``;
+        this.shadowRoot.appendChild(this.estilos.clone)
+  }
 }
-customElements.define('barrade-busqueda', BarradeBusqueda)
-customElements.define('ver-heroes',VerHeroes)
-compn.HeroesStore = HeroesStore
 
+
+customElements.define("nav-bar", NavBar);
+customElements.define('laLista-heroes', VerlosHeroes)
+elcomponente.datas = datas 

@@ -1,4 +1,4 @@
-export const HeroesStore = [
+export const datas = [
 
     {
         nombre_heroes: "Superman",
